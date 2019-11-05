@@ -19,10 +19,9 @@ state. We add this heuristic function with the length of the
 existing path to sort the queue during A* search.
 
 Part B:
-We have use depth first search to reach the desired state. 
+We have use breadth first search to reach the desired state. 
 We compare the length of the new path with the shortest path 
-we have found before. When we find a shorter path, we delete
-all the existing paths.
+we have found before.
 '''
 
 import re
@@ -233,7 +232,7 @@ def a_star_search(init_state, result_state, boat_cap):
         s.sort()
     return None
 
-def dfs_search_all_sequences(init_state, result_state, boat_cap):
+def bfs_search_all_sequences(init_state, result_state, boat_cap):
     # Create the initial root node and add initial state to its path
     rootNode = Node()
     rootNode.add_to_path(init_state)
@@ -251,7 +250,7 @@ def dfs_search_all_sequences(init_state, result_state, boat_cap):
     shortestPathLength = -1
 
     while not len(s) == 0:  
-        current_node  = s.pop()
+        current_node  = s.pop(0)
         legal_states  = get_legal_states(current_node, m, c, boat_cap)
 
         # Print progress info
@@ -338,8 +337,8 @@ init_state = [4,4,1]
 result_state = [0,0,0]
 boat_capacity = 3
 
-print("DFS:")
-sequences = dfs_search_all_sequences(init_state, result_state, boat_capacity)    
+print("BFS:")
+sequences = bfs_search_all_sequences(init_state, result_state, boat_capacity)    
 
 # Print the number of shortest sequences and the sequnces themselves
 print("\nThe number of shortest sequences:",len(sequences))
